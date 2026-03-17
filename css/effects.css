@@ -1,0 +1,190 @@
+/* ============================================
+   GLOBAL EFFECTS — keyframes + overlay layers
+   ============================================ */
+
+/* --- CRT scanlines --- */
+#scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.15) 3px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+}
+
+/* --- CRT vignette / edge darkening --- */
+#crt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+}
+
+/* --- Animated noise canvas --- */
+#noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: screen;
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+/* Glitch clip layers */
+@keyframes glitch-clip-1 {
+  0%   { clip-path: inset(40% 0 61% 0); transform: translate(-4px, 0); }
+  10%  { clip-path: inset(92% 0  1% 0); transform: translate( 4px, 0); }
+  20%  { clip-path: inset(43% 0 50% 0); transform: translate(-2px, 0); }
+  30%  { clip-path: inset(25% 0 58% 0); transform: translate( 2px, 0); }
+  40%  { clip-path: inset(54% 0  7% 0); transform: translate(-4px, 0); }
+  50%  { clip-path: inset(58% 0 43% 0); transform: translate( 4px, 0); }
+  60%  { clip-path: inset(16% 0 72% 0); transform: translate(-2px, 2px); }
+  70%  { clip-path: inset(81% 0  5% 0); transform: translate( 3px, 0); }
+  80%  { clip-path: inset(30% 0 40% 0); transform: translate(-3px, 0); }
+  90%  { clip-path: inset(68% 0 20% 0); transform: translate( 2px, -2px); }
+  100% { clip-path: inset(14% 0 73% 0); transform: translate( 0px, 0); }
+}
+
+@keyframes glitch-clip-2 {
+  0%   { clip-path: inset(65% 0  8% 0); transform: translate( 3px, 0) skewX(1deg); }
+  10%  { clip-path: inset(10% 0 60% 0); transform: translate(-3px, 0) skewX(-1deg); }
+  20%  { clip-path: inset(79% 0  3% 0); transform: translate( 2px, 1px); }
+  30%  { clip-path: inset(35% 0 44% 0); transform: translate(-2px, 0); }
+  40%  { clip-path: inset(20% 0 67% 0); transform: translate( 4px, -1px) skewX(2deg); }
+  50%  { clip-path: inset(88% 0  2% 0); transform: translate(-4px, 0); }
+  60%  { clip-path: inset(47% 0 38% 0); transform: translate( 1px, 2px); }
+  70%  { clip-path: inset(5%  0 82% 0); transform: translate(-1px, 0) skewX(-2deg); }
+  80%  { clip-path: inset(60% 0 22% 0); transform: translate( 3px, 0); }
+  90%  { clip-path: inset(25% 0 55% 0); transform: translate(-3px, 1px); }
+  100% { clip-path: inset(72% 0 11% 0); transform: translate( 0px, 0); }
+}
+
+@keyframes glitch-color {
+  0%, 85%, 100% { text-shadow: var(--glow-green); color: var(--green); }
+  88% { text-shadow: -3px 0 var(--red), 3px 0 var(--cyan); color: var(--white); }
+  91% { text-shadow: 3px 0 var(--red), -3px 0 var(--cyan); color: var(--green); }
+  94% { text-shadow: -2px 0 var(--cyan), 2px 0 var(--red); color: var(--white); }
+  97% { text-shadow: var(--glow-green); color: var(--green); }
+}
+
+/* Generic blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Fade in */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Slide up */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Page-wide glitch (used by terminal command) */
+@keyframes page-glitch {
+  0%   { filter: none; transform: none; }
+  8%   { filter: hue-rotate(90deg) saturate(3) brightness(1.5); transform: translate(5px, 0); }
+  16%  { filter: invert(1); transform: translate(-5px, 3px); }
+  24%  { filter: hue-rotate(180deg) saturate(2); transform: translate(0, -4px); }
+  32%  { filter: none; transform: none; }
+  40%  { filter: brightness(0.2); transform: translate(3px, 0); }
+  48%  { filter: hue-rotate(270deg) saturate(4); transform: translate(-3px, 2px); }
+  56%  { filter: none; transform: none; }
+  64%  { filter: invert(0.7) hue-rotate(45deg); transform: translate(4px, -2px); }
+  72%  { filter: none; transform: none; }
+  80%  { filter: hue-rotate(180deg); transform: translate(-2px, 0); }
+  88%  { filter: invert(0.3); transform: none; }
+  100% { filter: none; transform: none; }
+}
+
+/* Skill bar fill */
+@keyframes skill-fill {
+  from { width: 0; }
+  to   { width: var(--skill-pct); }
+}
+
+/* Stripe movement inside skill bars */
+@keyframes stripe-move {
+  from { background-position: 0 0; }
+  to   { background-position: 28px 0; }
+}
+
+/* Boot progress bar glow pulse */
+@keyframes bar-pulse {
+  0%, 100% { box-shadow: 0 0 5px var(--green), 0 0 15px rgba(0,255,65,0.3); }
+  50%       { box-shadow: 0 0 10px var(--green), 0 0 30px rgba(0,255,65,0.6); }
+}
+
+/* Scan line sweep on cards */
+@keyframes scan-sweep {
+  from { top: -100%; }
+  to   { top: 200%; }
+}
+
+/* ============================================
+   GLITCH TEXT COMPONENT
+   ============================================ */
+
+.glitch {
+  position: relative;
+  color: var(--green);
+  font-family: var(--font-display);
+  animation: glitch-color 5s infinite;
+  will-change: text-shadow, color;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--green);
+  will-change: clip-path, transform;
+}
+
+.glitch::before {
+  color: var(--red);
+  animation: glitch-clip-1 4s infinite linear alternate-reverse;
+  opacity: 0.8;
+}
+
+.glitch::after {
+  color: var(--cyan);
+  animation: glitch-clip-2 3s infinite linear alternate-reverse;
+  left: 2px;
+  opacity: 0.8;
+}
+
+/* Intense trigger (added/removed by JS) */
+.glitch.intense::before { animation-duration: 0.15s !important; }
+.glitch.intense::after  { animation-duration: 0.1s  !important; }
+
+/* Blink utility */
+.blink { animation: blink 1s step-end infinite; }
+
+/* Cursor underscore */
+.cursor {
+  display: inline-block;
+  animation: blink 0.8s step-end infinite;
+  color: var(--green);
+  margin-left: 2px;
+}

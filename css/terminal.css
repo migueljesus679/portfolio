@@ -1,0 +1,152 @@
+/* ============================================
+   INTERACTIVE TERMINAL MODAL
+   ============================================ */
+
+/* Floating trigger button */
+#terminal-trigger {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  z-index: 4999;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--green);
+  border: 1px solid var(--green);
+  padding: 0.5rem 0.9rem;
+  background: rgba(0, 0, 0, 0.9);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 10px rgba(0,255,65,0.2);
+}
+#terminal-trigger:hover {
+  color: #000;
+  background: var(--green);
+  box-shadow: var(--glow-green);
+}
+#terminal-trigger .t-cursor {
+  animation: blink 0.8s step-end infinite;
+  margin-left: 2px;
+}
+
+/* Terminal modal */
+#terminal-modal {
+  position: fixed;
+  bottom: 5rem;
+  right: 1.8rem;
+  width: min(520px, calc(100vw - 2rem));
+  max-height: 420px;
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-terminal);
+  border: 1px solid var(--green);
+  box-shadow: var(--glow-green), 0 20px 60px rgba(0,0,0,0.8);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  animation: terminal-open 0.2s ease;
+}
+
+@keyframes terminal-open {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Title bar */
+.terminal-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  background: rgba(0, 255, 65, 0.08);
+  border-bottom: 1px solid var(--green-dark);
+  color: var(--green-dim);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  user-select: none;
+}
+
+#terminal-close {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--red);
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid var(--red);
+  transition: background 0.15s, color 0.15s;
+}
+#terminal-close:hover {
+  background: var(--red);
+  color: #000;
+}
+
+/* Output area */
+#terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.8rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--green-dark) transparent;
+  max-height: 300px;
+}
+#terminal-output::-webkit-scrollbar { width: 3px; }
+#terminal-output::-webkit-scrollbar-thumb { background: var(--green-dark); }
+
+.t-line {
+  margin: 0 0 0.2rem;
+  color: var(--white);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.t-line.cmd  { color: var(--green); }
+.t-line.err  { color: var(--red); }
+.t-line.info { color: var(--cyan); }
+.t-line.warn { color: var(--yellow); }
+.t-line.dim  { color: var(--grey); }
+
+.t-cmd { color: var(--cyan); }
+
+/* Separator line */
+.t-line.separator {
+  color: var(--green-dark);
+  border-bottom: 1px solid var(--green-dark);
+  margin: 0.5rem 0;
+}
+
+/* Input row */
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  border-top: 1px solid var(--green-dark);
+  background: rgba(0,0,0,0.3);
+}
+
+.t-prompt {
+  color: var(--green);
+  white-space: nowrap;
+  font-size: 0.78rem;
+  flex-shrink: 0;
+}
+
+#terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  caret-color: var(--green);
+}
+
+@media (max-width: 600px) {
+  #terminal-modal {
+    bottom: 4.5rem;
+    right: 0.8rem;
+    left: 0.8rem;
+    width: auto;
+  }
+}

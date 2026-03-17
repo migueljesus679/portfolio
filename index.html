@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MIGUEL_JESUS — Full Stack Developer Portfolio">
+  <title>MIGUEL_JESUS // PORTFOLIO</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+
+  <!-- CSS — order matters -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/effects.css">
+  <link rel="stylesheet" href="css/boot.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/skills.css">
+  <link rel="stylesheet" href="css/projects.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/terminal.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       GLOBAL OVERLAY LAYERS (fixed, pointer-events: none)
+       ============================================================ -->
+
+  <!-- CRT vignette -->
+  <div id="crt-overlay" aria-hidden="true"></div>
+
+  <!-- Animated noise static -->
+  <canvas id="noise-overlay" aria-hidden="true"></canvas>
+
+  <!-- Scanlines -->
+  <div id="scanlines" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       BOOT SCREEN
+       ============================================================ -->
+  <div id="boot-screen" role="status" aria-live="polite">
+    <div class="boot-logo">
+      <pre>
+███╗   ███╗ ██╗  ██████╗  ██╗   ██╗ ███████╗ ██╗
+████╗ ████║ ██║ ██╔════╝  ██║   ██║ ██╔════╝ ██║
+██╔████╔██║ ██║ ██║  ███╗ ██║   ██║ █████╗   ██║
+██║╚██╔╝██║ ██║ ██║   ██║ ██║   ██║ ██╔══╝   ██║
+██║ ╚═╝ ██║ ██║ ╚██████╔╝ ╚██████╔╝ ███████╗ ███████╗
+╚═╝     ╚═╝ ╚═╝  ╚═════╝   ╚═════╝  ╚══════╝ ╚══════╝
+
+     ██╗ ███████╗ ███████╗ ██╗   ██╗ ███████╗
+     ██║ ██╔════╝ ██╔════╝ ██║   ██║ ██╔════╝
+     ██║ █████╗   ███████╗ ██║   ██║ ███████╗
+██   ██║ ██╔══╝   ╚════██╗ ██║   ██║ ╚════██╗
+╚█████╔╝ ███████╗ ███████║ ╚██████╔╝ ███████║
+ ╚════╝  ╚══════╝ ╚══════╝  ╚═════╝  ╚══════╝
+      </pre>
+    </div>
+
+    <div class="boot-log" id="boot-log"></div>
+
+    <div class="boot-bar-wrap">
+      <div id="boot-bar"></div>
+    </div>
+
+    <div class="boot-status">
+      <span>INITIALIZING SYSTEM...</span>
+      <span id="boot-status-pct">0%</span>
+    </div>
+
+    <p class="boot-skip">[PRESS ANY KEY TO SKIP]</p>
+  </div>
+
+  <!-- ============================================================
+       MATRIX RAIN CANVAS (fixed background)
+       ============================================================ -->
+  <canvas id="matrix-rain" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav id="topnav" aria-label="Main navigation">
+    <span class="nav-logo glitch" data-text="MIGUEL_JESUS">MIGUEL_JESUS</span>
+    <div class="nav-links">
+      <a href="#about">[ABOUT]</a>
+      <a href="#skills">[SKILLS]</a>
+      <a href="#projects">[PROJECTS]</a>
+      <a href="#contact">[CONTACT]</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       MAIN SITE CONTENT (hidden until boot completes)
+       ============================================================ -->
+  <main id="site-content" class="hidden">
+
+    <!-- ── HERO ───────────────────────────────────────────────── -->
+    <section id="hero" aria-label="Introduction">
+      <div class="hero-content">
+        <p class="hero-prefix">&gt; SYSTEM INITIALIZED. USER IDENTIFIED:</p>
+
+        <h1 class="glitch" data-text="MIGUEL_JESUS">MIGUEL_JESUS</h1>
+
+        <p class="hero-title" id="hero-title"></p>
+
+        <p class="hero-tagline corrupted-text"
+           data-plain="BUILDING THE FUTURE, ONE LINE AT A TIME.">
+          ##@!ING TH3 FUT#RE, 0NE L!NE @T @ T!ME.
+        </p>
+
+        <div class="hero-status">
+          <span class="status-item">
+            <span class="dot"></span>
+            SYSTEM ONLINE
+          </span>
+          <span class="status-item">
+            <span class="dot"></span>
+            WORKING IN PROGRESS
+          </span>
+          <span class="status-item">
+            <span class="dot"></span>
+            WATER LEVELS: STABLE
+          </span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#about"    class="btn-hack">[ ENTER ]</a>
+          <a href="#projects" class="btn-hack">[ VIEW WORK ]</a>
+          <a href="#contact"  class="btn-hack cyan">[ CONTACT ]</a>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <span class="blink">▼ SCROLL TO EXPLORE ▼</span>
+      </div>
+    </section>
+
+    <!-- ── ABOUT ──────────────────────────────────────────────── -->
+    <section id="about" aria-label="About">
+      <h2 class="section-title glitch" data-text=">_ ABOUT">&gt;_ ABOUT</h2>
+
+      <div class="about-grid">
+        <!-- Bio text -->
+        <div class="about-bio">
+          <p>
+            Hello. I'm <span class="highlight">MIGUEL_JESUS</span> — a Web Developer
+            with <span class="highlight-cyan">3 years of experience</span> building things
+            that work, scale, and don't catch fire at 3am.
+          </p>
+          <p>
+            I thrive in the intersection of <span class="highlight">clean architecture</span>
+            and <span class="highlight-cyan">pragmatic delivery</span>. I've shipped products
+            used by thousands of users, contributed to open-source projects, and survived
+            more than a few production incidents to tell the tale.
+          </p>
+
+          <div class="about-info">
+            <div class="about-info-item">
+              <span class="label">&gt; LOCATION</span>
+              <span class="value">[Lisbon, Portugal]</span>
+            </div>
+            <div class="about-info-item">
+              <span class="label">&gt; ROLE</span>
+              <span class="value">Web Developer</span>
+            </div>
+            <div class="about-info-item">
+              <span class="label">&gt; EXPERIENCE</span>
+              <span class="value">3+ years</span>
+            </div>
+            <div class="about-info-item">
+              <span class="label">&gt; EDUCATION</span>
+              <span class="value">[YOUR DEGREE / SELF-TAUGHT]</span>
+            </div>
+            <div class="about-info-item">
+              <span class="label">&gt; STATUS</span>
+              <span class="value" style="color:var(--green)">WORKING IN PROGRESS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ASCII art + stats -->
+        <div class="about-ascii">
+          <pre class="ascii-art">
+        ░░░░░░░░░░░░░░░░░░░░
+        ░░░▄▄▄▄▄▄▄▄▄▄▄▄░░░░
+        ░░▄▀░░░░░░░░░░░▀▄░░░
+        ░▄▀░▄▄███████▄▄░▀▄░░
+        ░█░░██▀▀▀▀▀▀▀██░░█░░
+        ░█░░██  ◉  ◉  ██░░█░░
+        ░█░░██░░▄▄▄░░░██░░█░░
+        ░█░░██░░░▀░░░░██░░█░░
+        ░▀▄░▀█████████▀░▄▀░░
+        ░░░▀▄▄░░░░░░░▄▄▀░░░░
+        ░░░░░░▀▀▀▀▀▀▀░░░░░░░
+        ░░░ > MIGUEL_JESUS.exe ░░
+          </pre>
+
+          <div class="about-stats">
+            <div class="stat-box">
+              <span class="stat-num">3+</span>
+              <span class="stat-label">YEARS EXP</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">3</span>
+              <span class="stat-label">PROJECTS</span>
+            </div>
+            <!--
+            <div class="stat-box">
+              <span class="stat-num">XX</span>
+              <span class="stat-label">COMMITS/MO</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">∞</span>
+              <span class="stat-label">COFFEE CUPS</span>
+            </div>
+            -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SKILLS ─────────────────────────────────────────────── -->
+    <section id="skills" aria-label="Skills">
+      <h2 class="section-title glitch" data-text=">_ CAPABILITIES">&gt;_ CAPABILITIES</h2>
+
+      <div class="skills-grid">
+
+        <p class="skills-category">// LANGUAGES</p>
+
+        <div class="skill-item">
+          <span class="skill-name">JAVASCRIPT</span>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--skill-pct: 63%"></div>
+          </div>
+          <span class="skill-pct">63%</span>
+        </div>
+
+        <div class="skill-item">
+          <span class="skill-name">LARAVEL</span>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--skill-pct: 55%"></div>
+          </div>
+          <span class="skill-pct">55%</span>
+        </div>
+
+        <div class="skill-item">
+          <span class="skill-name">HTML/CSS</span>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--skill-pct: 65%"></div>
+          </div>
+          <span class="skill-pct">65%</span>
+        </div>
+
+        <div class="skill-item">
+          <span class="skill-name">SQL</span>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--skill-pct: 52%"></div>
+          </div>
+          <span class="skill-pct">52%</span>
+        </div>
+
+        <p class="skills-category">// FRAMEWORKS &amp; TOOLS</p>
+
+        <div class="skill-item">
+          <span class="skill-name">CLAUDE CODE</span>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--skill-pct: 40%"></div>
+          </div>
+          <span class="skill-pct">40%</span>
+        </div>
+
+        <div class="skill-item">
+          <span class="skill-name">NODE.JS</span>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--skill-pct: 55%"></div>
+          </div>
+          <span class="skill-pct">55%</span>
+        </div>
+
+        <div class="skill-item">
+          <span class="skill-name">WORDPRESS</span>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--skill-pct: 85%"></div>
+          </div>
+          <span class="skill-pct">85%</span>
+        </div>
+
+        <div class="skill-item">
+          <span class="skill-name">WOOCOMMERCE</span>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--skill-pct: 70%"></div>
+          </div>
+          <span class="skill-pct">70%</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ───────────────────────────────────────────── -->
+    <section id="projects" aria-label="Projects">
+      <h2 class="section-title glitch" data-text=">_ PROJECTS">&gt;_ PROJECTS</h2>
+
+      <div class="projects-grid">
+
+        <!-- Card 1 -->
+        <article class="project-card featured">
+          <div class="card-header">
+            <span class="card-id">// PROJECT_001</span>
+            <span class="card-status online">ONLINE</span>
+          </div>
+          <h3 class="card-title">Riddle Games</h3>
+          <p class="card-desc">
+            A full-stack web application for [describe what it does]. Built with a focus
+            on performance and scalability. Handles [X] active users daily.
+          </p>
+          <div class="card-tags">
+            <span class="tag">REACT</span>
+            <span class="tag">NODE.JS</span>
+            <span class="tag">JAVASCRIPT</span>
+            <span class="tag">Render</span>
+          </div>
+          <div class="card-links">
+            <a href="https://riddlevault.onrender.com/" target="_blank" class="btn-hack sm">[ LIVE DEMO ]</a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="project-card">
+          <div class="card-header">
+            <span class="card-id">// PROJECT_002</span>
+            <span class="card-status online">ONLINE</span>
+          </div>
+          <h3 class="card-title">Global Elite</h3>
+          <p class="card-desc">
+            A command-line tool that automates [repetitive task] and saves developers
+            hours of manual work every week. 500+ stars on GitHub.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Wordpress</span>
+            <span class="tag">WooCommerce</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">JAVASCRIPT</span>
+            <span class="tag">CLAUDE CODE</span>
+          </div>
+          <div class="card-links">
+            <a href="https://etuetu.pt/" target="_blank" class="btn-hack sm">[ LIVE ]</a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="project-card">
+          <div class="card-header">
+            <span class="card-id">// PROJECT_003</span>
+            <span class="card-status wip">IN PROGRESS</span>
+          </div>
+          <h3 class="card-title">PROJECT_GAMMA</h3>
+          <p class="card-desc">
+            Experimental machine learning pipeline for [use case]. Still in early
+            research phase — proceed with caution.
+          </p>
+          <div class="card-tags">
+            <span class="tag">PYTHON</span>
+            <span class="tag">TENSORFLOW</span>
+            <span class="tag">JUPYTER</span>
+          </div>
+          <div class="card-links">
+            <a href="#" class="btn-hack sm">[ GITHUB ]</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── CONTACT ────────────────────────────────────────────── -->
+    <section id="contact" aria-label="Contact">
+      <h2 class="section-title glitch" data-text=">_ CONTACT">&gt;_ CONTACT</h2>
+
+      <div class="contact-wrap">
+
+        <!-- Info -->
+        <div class="contact-info">
+          <p>&gt; EMAIL: <a href="mailto:user@domain.com">user@domain.com</a></p>
+          <p>&gt; GITHUB: <a href="#">github.com/MIGUEL_JESUS</a></p>
+          <p>&gt; LINKEDIN: <a href="#">linkedin.com/in/MIGUEL_JESUS</a></p>
+          <p class="available blink">&gt; STATUS: WORKING IN PROGRESS</p>
+        </div>
+
+        <!-- Form -->
+        <form class="terminal-form" id="contact-form" novalidate>
+          <div class="form-field">
+            <label for="f-name">// SENDER_ID:</label>
+            <input type="text" id="f-name" name="name"
+                   placeholder="ENTER YOUR NAME" autocomplete="off" required>
+          </div>
+          <div class="form-field">
+            <label for="f-email">// TRANSMISSION_ADDR:</label>
+            <input type="email" id="f-email" name="email"
+                   placeholder="ENTER YOUR EMAIL" autocomplete="off" required>
+          </div>
+          <div class="form-field">
+            <label for="f-msg">// MESSAGE_PAYLOAD:</label>
+            <textarea id="f-msg" name="message" rows="5"
+                      placeholder="ENTER YOUR MESSAGE" required></textarea>
+          </div>
+          <button type="submit" class="btn-hack">[ TRANSMIT ]</button>
+          <p class="form-status" id="form-status" aria-live="polite"></p>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.7rem;
+      color: var(--grey);
+      border-top: 1px solid var(--green-dark);
+      letter-spacing: 0.1em;
+    ">
+      <p>&gt; EOF — MIGUEL_JESUS © 2024 — ALL RIGHTS RESERVED</p>
+      <p style="margin-top:0.4rem; color: var(--green-dark);">
+        PRESS <span style="color:var(--green)">` </span> TO OPEN TERMINAL
+      </p>
+    </footer>
+
+  </main><!-- /#site-content -->
+
+  <!-- ============================================================
+       TERMINAL MODAL (Easter egg)
+       ============================================================ -->
+  <div id="terminal-modal" class="hidden" role="dialog" aria-label="Interactive terminal">
+    <div class="terminal-titlebar">
+      <span>SYSTEM TERMINAL v1.0 — root@portfolio</span>
+      <button id="terminal-close" aria-label="Close terminal">[X]</button>
+    </div>
+    <div id="terminal-output" role="log" aria-live="polite">
+      <p class="t-line info">Welcome to MIGUEL_JESUS's terminal.</p>
+      <p class="t-line dim">Type <span class="t-cmd">help</span> for available commands.</p>
+      <p class="t-line dim">─────────────────────────────────────────</p>
+    </div>
+    <div class="terminal-input-row">
+      <span class="t-prompt">root@portfolio:~$&nbsp;</span>
+      <input type="text" id="terminal-input"
+             autocomplete="off" spellcheck="false"
+             aria-label="Terminal input">
+    </div>
+  </div>
+
+  <!-- Trigger button -->
+  <button id="terminal-trigger" aria-label="Open terminal">&gt;_<span class="t-cursor">|</span></button>
+
+  <!-- JS — ES modules -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>

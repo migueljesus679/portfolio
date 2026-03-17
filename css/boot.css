@@ -1,0 +1,135 @@
+/* ============================================
+   BOOT SCREEN
+   ============================================ */
+
+#boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  color: var(--green);
+  padding: 2rem;
+  text-align: left;
+}
+
+/* ASCII logo / skull */
+.boot-logo {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.boot-logo pre {
+  font-family: var(--font-mono);
+  font-size: clamp(0.4rem, 1.2vw, 0.7rem);
+  line-height: 1.1;
+  color: var(--green);
+  text-shadow: var(--glow-green);
+  white-space: pre;
+  display: inline-block;
+}
+
+/* Scrolling log lines */
+.boot-log {
+  width: 100%;
+  max-width: 680px;
+  height: 200px;
+  overflow: hidden;
+  font-size: clamp(0.7rem, 1.5vw, 0.82rem);
+  line-height: 1.7;
+}
+
+.boot-log p {
+  margin: 0;
+  opacity: 0;
+  animation: fade-in 0.08s forwards;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.boot-log p.warn  { color: var(--yellow); }
+.boot-log p.error { color: var(--red); }
+.boot-log p.ok    { color: var(--green); }
+.boot-log p.dim   { color: var(--green-dim); }
+
+/* Progress bar */
+.boot-bar-wrap {
+  width: 100%;
+  max-width: 680px;
+  height: 4px;
+  background: #0a0a0a;
+  border: 1px solid var(--green-dim);
+  margin-top: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#boot-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--green);
+  animation: bar-pulse 1.2s ease-in-out infinite;
+  transition: width 0.12s linear;
+}
+
+/* Skip hint */
+.boot-skip {
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  color: var(--grey);
+  letter-spacing: 0.12em;
+  animation: blink 2s step-end infinite;
+}
+
+/* Status line below bar */
+.boot-status {
+  margin-top: 0.8rem;
+  font-size: 0.7rem;
+  color: var(--green-dim);
+  letter-spacing: 0.08em;
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Exit animation — screen tears apart */
+#boot-screen.exit {
+  animation: boot-exit 0.55s cubic-bezier(0.4, 0, 1, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes boot-exit {
+  0%  {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: none;
+  }
+  30% {
+    clip-path: inset(0 0 50% 0);
+    opacity: 1;
+    transform: translateY(-8px) scaleY(0.98);
+    filter: brightness(2);
+  }
+  60% {
+    clip-path: inset(50% 0 0 0);
+    opacity: 0.6;
+    transform: translateY(8px);
+    filter: brightness(3) hue-rotate(30deg);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .boot-logo pre { font-size: 0.35rem; }
+  .boot-log { height: 160px; }
+}

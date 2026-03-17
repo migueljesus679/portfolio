@@ -1,0 +1,131 @@
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #001500 0%, var(--bg) 70%);
+  padding: 2rem;
+}
+
+/* Matrix canvas sits behind hero content */
+#matrix-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  animation: slide-up 0.8s ease 0.2s both;
+}
+
+/* System prefix line */
+.hero-prefix {
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  color: var(--green-dim);
+  letter-spacing: 0.15em;
+}
+
+/* Main name — giant glitch heading */
+#hero h1.glitch {
+  font-size: clamp(3.5rem, 14vw, 10rem);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  margin: 0.2rem 0;
+}
+
+/* Typewriter subtitle */
+.hero-title {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  min-height: 1.6em;
+  letter-spacing: 0.12em;
+}
+
+/* Corrupted tagline */
+.hero-tagline {
+  font-size: clamp(0.75rem, 1.8vw, 1rem);
+  color: var(--green-dim);
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+  max-width: 600px;
+}
+
+/* CTA buttons */
+.hero-cta {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 0.7rem;
+  color: var(--green-dim);
+  letter-spacing: 0.15em;
+  animation: fade-in 1s ease 2s both;
+}
+
+/* Floating particles that appear on glitch click */
+.glitch-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  pointer-events: none;
+  z-index: 9990;
+  border-radius: 50%;
+  animation: particle-scatter 0.6s ease-out forwards;
+}
+
+@keyframes particle-scatter {
+  0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+}
+
+/* Status bar under name */
+.hero-status {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.72rem;
+  color: var(--green-dim);
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-status .status-item { display: flex; align-items: center; gap: 0.4rem; }
+.hero-status .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: blink 2s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .hero-cta { gap: 0.8rem; }
+  .hero-status { gap: 1rem; }
+}
