@@ -18,7 +18,7 @@ function initHero() {
       phrases: [
         'WEB DEVELOPER',
         'PROBLEM SOLVER',
-        'OPEN SOURCE CONTRIBUTOR',
+        'AI ETHUSIAST',
         'BUG HUNTER',
       ],
       speed: 85,

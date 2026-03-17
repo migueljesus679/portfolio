@@ -45,17 +45,25 @@ const COMMANDS = {
 
   skills: {
     desc: 'Technical skills',
-    run: () => [
-      { text: '// SKILL_MATRIX.json', cls: 'info' },
-      { text: 'PYTHON      ████████████████████░░░░  92%', cls: '' },
-      { text: 'LINUX       ████████████████████░░░░  90%', cls: '' },
-      { text: 'JAVASCRIPT  ██████████████████░░░░░░  88%', cls: '' },
-      { text: 'REACT       ████████████████░░░░░░░░  80%', cls: '' },
-      { text: 'NODE.JS     ███████████████░░░░░░░░░  75%', cls: '' },
-      { text: 'SQL         ██████████████░░░░░░░░░░  70%', cls: '' },
-      { text: 'DOCKER      █████████████░░░░░░░░░░░  65%', cls: '' },
-      { text: 'C/C++       ████████████░░░░░░░░░░░░  60%', cls: '' },
-    ]
+    run: () => {
+      const makeBar = (pct) => {
+        const filled = Math.round(pct / 5);
+        const empty = 20 - filled;
+        return '█'.repeat(filled) + '░'.repeat(empty);
+      };
+      return [
+        { text: '// SKILL_MATRIX.json', cls: 'info' },
+        { text: `JAVASCRIPT       ${makeBar(63)}  63%`, cls: '' },
+        { text: `LARAVEL          ${makeBar(55)}  55%`, cls: '' },
+        { text: `HTML/CSS         ${makeBar(65)}  65%`, cls: '' },
+        { text: `SQL              ${makeBar(52)}  52%`, cls: '' },
+        { text: `WORDPRESS        ${makeBar(85)}  85%`, cls: '' },
+        { text: `WOOCOMMERCE      ${makeBar(70)}  70%`, cls: '' },
+        { text: `CLAUDE CODE      ${makeBar(65)}  65%`, cls: '' },
+        { text: `WINDOWS SERVER   ${makeBar(60)}  60%`, cls: '' },
+        { text: `PRTG             ${makeBar(30)}  30%`, cls: '' },
+      ];
+    }
   },
 
   projects: {
@@ -63,10 +71,10 @@ const COMMANDS = {
     run: () => [
       { text: '// PROJECTS_INDEX', cls: 'info' },
       { text: '', cls: '' },
-      { text: '[01] PROJECT_ALPHA       ● ONLINE', cls: 'cmd' },
+      { text: '[01] Riddle Games        ● ONLINE', cls: 'cmd' },
       { text: '     Full-stack web app — React + Node.js + MongoDB', cls: '' },
       { text: '', cls: '' },
-      { text: '[02] PROJECT_BETA        ● ONLINE', cls: 'cmd' },
+      { text: '[02] Global Elite        ● ONLINE', cls: 'cmd' },
       { text: '     CLI tool — Python + Docker', cls: '' },
       { text: '', cls: '' },
       { text: '[03] PROJECT_GAMMA       ◌ WIP', cls: 'warn' },
@@ -81,9 +89,8 @@ const COMMANDS = {
       { text: 'EMAIL    : user@domain.com', cls: '' },
       { text: 'GITHUB   : github.com/MIGUEL_JESUS', cls: '' },
       { text: 'LINKEDIN : linkedin.com/in/MIGUEL_JESUS', cls: '' },
-      { text: 'TWITTER  : @MIGUEL_JESUS', cls: '' },
       { text: '', cls: '' },
-      { text: '> STATUS: AVAILABLE FOR HIRE', cls: 'cmd' },
+      { text: '> STATUS: WORKING IN PROGRESS', cls: 'cmd' },
     ]
   },
 
